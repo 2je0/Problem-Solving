@@ -9,7 +9,7 @@ int main()
     cout.tie(NULL);
     // freopen("input.txt", "r", stdin);
     map<string, int> strkey;
-    map<int, string> intkey;
+    // map<int, string> intkey;
 
     int n, m;
     cin >> n >> m;
@@ -18,7 +18,7 @@ int main()
         string input;
         cin >> input;
         strkey[input] = i;
-        intkey[i] = input;
+        arr[i] = input;
     }
 
     for (int i = 0; i < m; i++)
@@ -27,7 +27,7 @@ int main()
         cin >> input;
         int isdigit = atoi(input.c_str());
         if (isdigit)
-            cout << intkey[isdigit] << '\n';
+            cout << arr[isdigit] << '\n';
         else
             cout << strkey[input] << '\n';
     }
