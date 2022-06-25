@@ -2,32 +2,18 @@
 #define endl '\n'
 #define ll long long
 using namespace std;
-int bosu(int last, int tempLast)
+ll sol(ll n)
 {
-    int dp[10] = {
-        0,
-    };
-    if (dp[tempLast])
-        return dp[tempLast];
-    for (int i = 0; i < 10; i++)
+    ll cnt = 1;
+    ll num = 1;
+    while (1)
     {
-        if (((last * i) + tempLast) % 10 == 1)
+        if (!(num % n))
         {
-            dp[tempLast] = i;
-            return i;
+            break;
         }
-    }
-}
-ll sol(ll number)
-{
-    ll temp = number;
-    int last = temp % 10;
-    int cnt = 0;
-    while (temp)
-    {
-        int tempLast = temp % 10;
-        int mul = bosu(last, tempLast);
-        temp = (temp + number * mul) / 10;
+        num = num * 10 + 1;
+        num %= n;
         cnt++;
     }
     return cnt;
