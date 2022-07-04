@@ -1,52 +1,38 @@
-#include<iostream>
-#include<string>
- 
+#include <bits/stdc++.h>
 using namespace std;
- 
-const int MAX_INT = 64;
- 
-int arr[MAX_INT][MAX_INT];
- 
-int quadTree(int N, int y, int x) {
-    //기저 사례: N이 1인 경우 자기 자신을 반환
-    if (N == 1) {
- 
-        cout <<arr[y][x];
-        return 0;
+int arr[64][64];
+bool isAllSame(int i, int j, int size) {
+    int f = arr[i][j];
+    for (int x = i; x < i + size; x++) {
+        for (int y = j; y < j + size; y++) {
+            if (arr[x][y] != f) return false;
+        }
     }
-    
-    int find = arr[y][x];
-    int half = N / 2;
-    for (int i = y; i < y + N; i++) 
-        for (int j = x; j < x + N; j++) {
-            //기저 사례: 만일 구간 내에 자신과 다른 인자가 있는 경우, 4개로 나누어 압축한다.
-            if (find != arr[i][j]) {
-                cout << "(";
-                quadTree(half, y, x);
-                quadTree(half, y, x + half);
-                quadTree(half, y + half, x);
-                quadTree(half, y + half, x + half);
-                cout << ")";
-                return 0;
+    return true;
+}
+void recur(int i, int j, int size) {
+    if (isAllSame(i, j, size)) {
+        printf("%d", arr[i][j]);
+    } else {
+        printf("(");
+        int dd[] = {0, size / 2};
+        for (int x = 0; x < 2; x++) {
+            for (int y = 0; y < 2; y++) {
+                recur(i + dd[x], j + dd[y], size / 2);
             }
         }
-    //모든 인자가 같은 경우이므로 자기 자신을 출력
-    cout << find;
-    return 0;
-}
- 
-int main() {
-    int N;
-    string num;
-    cin >> N;
-    for (int i = 0; i < N; i++) {
-        cin >> num;
-        for (int j = 0; j < N; j++)
-            arr[i][j] = num[j] - '0';
+        printf(")");
     }
- 
-    quadTree(N, 0, 0);
- 
- 
+}
+int main() {
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%1d", &arr[i][j]);
+        }
+    }
+
+    recur(0, 0, n);
     return 0;
 }
