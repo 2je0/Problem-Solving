@@ -1,57 +1,42 @@
 #include <bits/stdc++.h>
-#define MAX 100000
+#define MAX 100004
 using namespace std;
-struct node {
-    vector<int> path;
-    int level;
-};
 
-int visited[100004];
-int minLevel = INT_MAX;
-int cnt = 0;
+int visited[MAX];
+int before[MAX];
+queue<int> q;
+int res;
+vector<int> v;
+
 int main() {
-    ios_base::sync_with_stdio(false);
-    cin.tie(NULL);
-    cout.tie(NULL);
     int n, k;
     cin >> n >> k;
-    if (n > k) {
-        cout << n - k << '\n';
-        for (int i = n; i >= k; i--) {
-            cout << i << ' ';
-        }
-        return 0;
-    }
-    queue<node> q;
-    node nd;
-    nd.path.push_back(n);
-    nd.level = 0;
-    q.push(nd);
+
+    q.push(n);
     visited[n] = 1;
     while (!q.empty()) {
-        vector<int> path = q.front().path;
-        int level = q.front().level;
+        int x = q.front();
         q.pop();
-        int x = path.back();
-        // cout << x << " " << level << endl;
         if (x == k) {
-            cout << level << '\n';
-            for (auto& ele : path) {
-                cout << ele << ' ';
-            }
-            return 0;
+            res = visited[x];
+            break;
         }
-
-        int nx[3] = {x - 1, x + 1, 2 * x};
+        int _nx[3] = {x - 1, x + 1, 2 * x};
         for (int i = 0; i < 3; i++) {
-            if (nx[i] < 0 || nx[i] > 100000 || visited[nx[i]]) continue;
-            node nnd;
-            nnd.path = path;
-            nnd.path.push_back(nx[i]);
-            nnd.level = level + 1;
-            visited[nx[i]] = 1;
-            q.push(nnd);
+            int nx = _nx[i];
+            if (nx < 0 || nx > 100000 || visited[nx]) continue;
+            q.push(nx);
+            visited[nx] = visited[x] + 1;
+            before[nx] = x;
         }
+    }
+    for (int i = k; i != n; i = before[i]) {
+        v.push_back(i);
+    }
+    v.push_back(n);
+    cout << res - 1 << '\n';
+    for (int i = v.size() - 1; i >= 0; i--) {
+        cout << v[i] << ' ';
     }
     return 0;
 }
