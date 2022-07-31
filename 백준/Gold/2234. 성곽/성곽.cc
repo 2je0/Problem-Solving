@@ -3,7 +3,6 @@ using namespace std;
 int m, n;
 int arr[50][50];
 int visited[50][50];
-int roomGraph[2500][2500];
 
 int maxx = -1;
 int dx[] = {0, -1, 0, 1};
@@ -38,21 +37,13 @@ int main() {
             sectionNum++;
         }
     }
-    // for (int i = 0; i < m; i++) {
-    //     for (int j = 0; j < n; j++) {
-    //         cout << visited[i][j] << ' ';
-    //     }
-    //     cout << endl;
-    // }
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
-            // cout << i << ',' << j << endl;
             for (int k = 0; k < 4; k++) {
                 int ni = i + dx[k];
                 int nj = j + dy[k];
                 if (ni < 0 || ni >= m || nj < 0 || nj >= n || visited[i][j] == visited[ni][nj]) continue;
                 int sum = room[visited[i][j] - 1] + room[visited[ni][nj] - 1];
-                // cout << visited[i][j] << "section +" << visited[ni][nj] << "section : " << sum << endl;
                 maxx = max(maxx, sum);
             }
         }
