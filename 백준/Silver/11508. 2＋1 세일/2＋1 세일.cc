@@ -5,7 +5,7 @@ long long sum;
 int arr[100004];
 int main() {
     cin >> n;
-    for (int i = 0, c; i < n; i++) {
+    for (int i = 0; i < n; i++) {
         cin >> arr[i];
     }
     sort(arr, arr + n, greater<int>());
