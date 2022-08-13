@@ -1,8 +1,10 @@
 #include <bits/stdc++.h>
+#define FIO ios ::sync_with_stdio(0), cin.tie(0), cout.tie(0)
 using namespace std;
 int n;
 
 int main() {
+    FIO;
     while (1) {
         long long maxx = LONG_LONG_MIN, minn = 0;
         long long curSum = 0;
