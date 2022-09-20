@@ -15,7 +15,6 @@ int main() {
     for (int i = 1; i <= n; i++) {
         for (int j = 1; j <= n; j++) {
             if (wall[i][j]) {
-                // cout << cnt[i][j][0] + cnt[i][j][1] + cnt[i][j][2] << ' ';
                 continue;
             }
             if (j > 1) {
@@ -31,9 +30,7 @@ int main() {
                 cnt[i][j][2] += cnt[i - 1][j - 1][1];
                 cnt[i][j][2] += cnt[i - 1][j - 1][2];
             }
-            // cout << cnt[i][j][0] + cnt[i][j][1] + cnt[i][j][2] << ' ';
         }
-        // cout << '\n';
     }
     cout << cnt[n][n][0] + cnt[n][n][1] + cnt[n][n][2];
     return 0;
