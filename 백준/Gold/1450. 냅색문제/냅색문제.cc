@@ -13,23 +13,6 @@ void rec(vector<int>& v, int level, int end, int sum) {
         rec(v, level + 1, end, sum + arr[level]);
     }
 }
-void test() {
-    cout << "arr : ";
-    for (int i = 0; i < n; i++) {
-        cout << arr[i] << ' ';
-    }
-    cout << '\n';
-    cout << "v1 : ";
-    for (auto& ele : v1) {
-        cout << ele << ' ';
-    }
-    cout << '\n';
-    cout << "v2 : ";
-    for (auto& ele : v2) {
-        cout << ele << ' ';
-    }
-    cout << "\ncnt : ";
-}
 int main() {
     cin >> n >> c;
     for (int i = 0; i < n; i++) {
@@ -39,12 +22,8 @@ int main() {
     rec(v2, (n / 2), n, 0);
     sort(v2.begin(), v2.end());
     for (auto& ele : v1) {
-        int b = c - ele;
-        int k = upper_bound(v2.begin(), v2.end(), b) - v2.begin();
-        cnt += k;
+        cnt += upper_bound(v2.begin(), v2.end(), c - ele) - v2.begin();
     }
-    // test();
     cout << cnt;
-
     return 0;
 }
